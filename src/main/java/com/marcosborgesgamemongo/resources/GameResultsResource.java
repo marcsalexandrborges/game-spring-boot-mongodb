@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,12 @@ public class GameResultsResource {
 		List<GameResults> list = service.findAll();
 		List<GameResultsDTO> listDto = list.stream().map(x -> new GameResultsDTO(x)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@RequestMapping(value="/{playerid}",method=RequestMethod.GET)
+	public ResponseEntity<GameResultsDTO> findByplayerId(@PathVariable String playerid){
+		GameResults obj = service.findByplayerId(playerid);
+		return ResponseEntity.ok().body(new GameResultsDTO(obj));
 	}
 
 }
