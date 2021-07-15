@@ -24,5 +24,7 @@ public class GameResultsService{
 		Optional<GameResults> obj= repo.findByplayerId(playerid);
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado"));
 	}
+	
+	
 }
 	
