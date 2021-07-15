@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcosborgesgamemongo.domain.GameResults;
+import com.marcosborgesgamemongo.dto.GameResultsDTO;
 import com.marcosborgesgamemongo.repository.GameResultsRepository;
 import com.marcosborgesgamemongo.services.exception.ObjectNotFoundException;
 
@@ -25,6 +26,13 @@ public class GameResultsService{
 		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 	
+	public GameResults insert(GameResults obj) {
+		return repo.insert(obj);
+	}
 	
+	public GameResults fromDTO(GameResultsDTO objDto) {
+		return new GameResults(objDto.getPlayerId(), objDto.getGameId(), objDto.getWin(), objDto.getTimestamp());
+		
+	}
 }
 	
